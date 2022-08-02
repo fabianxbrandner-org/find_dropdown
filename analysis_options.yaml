@@ -1,0 +1,13 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    avoid_print: true
+    prefer_single_quotes: true
+    public_member_api_docs: true
+    prefer_relative_imports: true
+
+analyzer:
+  exclude:
+    - "**/_dev/**"
+    - "**/generated/**"

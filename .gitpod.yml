@@ -1,0 +1,18 @@
+image:
+  file: .gitpod.Dockerfile
+tasks:
+  - before: >
+      source ~/.bashrc &&
+      brew update &&
+      brew install fastlane act &&
+      flutter upgrade && 
+      flutter update-packages --force-upgrade &&
+      flutter pub get
+
+vscode:
+  extensions:
+    - dart-code.dart-code
+    - dart-code.flutter
+    - PKief.material-icon-theme
+    - mhutchie.git-graph
+    - Gruntfuggly.todo-tree
