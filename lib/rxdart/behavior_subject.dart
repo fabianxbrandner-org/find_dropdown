@@ -168,7 +168,8 @@ class BehaviorSubject<T> extends Subject<T> implements ValueStream<T> {
   ValueStream<S> expand<S>(Iterable<S> Function(T element) convert) => _forwardBehaviorSubject<S>((s) => s.expand(convert));
 
   @override
-  ValueStream<S> transform<S>(StreamTransformer<T, S> streamTransformer) => _forwardBehaviorSubject<S>((s) => s.transform(streamTransformer));
+  ValueStream<S> transform<S>(StreamTransformer<T, S> streamTransformer) =>
+      _forwardBehaviorSubject<S>((s) => s.transform(streamTransformer));
 
   @override
   ValueStream<R> cast<R>() => _forwardBehaviorSubject<R>((s) => s.cast<R>());
@@ -196,13 +197,13 @@ class BehaviorSubject<T> extends Subject<T> implements ValueStream<T> {
     late BehaviorSubject<R> subject;
     late StreamSubscription<R> subscription;
 
-    final onListen = () => subscription = transformerStream(_stream).listen(
+    StreamSubscription<R> onListen() => subscription = transformerStream(_stream).listen(
           subject.add,
           onError: subject.addError,
           onDone: subject.close,
         );
 
-    final onCancel = () => subscription.cancel();
+    Future<void> onCancel() => subscription.cancel();
 
     return subject = createForwardingSubject(
       onListen: onListen,
